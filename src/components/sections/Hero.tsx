@@ -44,6 +44,13 @@ export function Hero() {
           </SplitText>
         </div>
 
+        <motion.div
+          className={styles.bgLine}
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 1.5, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}
+        />
+
         {/* Description */}
         <motion.p
           className={styles.description}
@@ -71,21 +78,6 @@ export function Hero() {
         </motion.div>
       </motion.div>
 
-      {/* Scroll Indicator */}
-      <motion.div
-        className={styles.scrollIndicator}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, delay: 1.5 }}
-      >
-        <span className={styles.scrollText}>Scroll</span>
-        <motion.div
-          className={styles.scrollLine}
-          animate={{ scaleY: [0, 1, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-        />
-      </motion.div>
-
       {/* Background Elements */}
       <div className={styles.bgElements}>
         <motion.div
@@ -93,12 +85,6 @@ export function Hero() {
           initial={{ scale: 0, opacity: 0 }}
           animate={{ scale: 1, opacity: 0.03 }}
           transition={{ duration: 1.5, delay: 0.5 }}
-        />
-        <motion.div
-          className={styles.bgLine}
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{ duration: 1.5, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}
         />
       </div>
     </section>
