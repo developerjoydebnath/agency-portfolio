@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import { MagneticButton } from '@/components/ui/MagneticButton';
-import { AnimatePresence, motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
-import styles from './Navbar.module.css';
+import { MagneticButton } from "@/components/ui/MagneticButton";
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import styles from "./Navbar.module.css";
 
 const navLinks = [
-  { href: '#services', label: 'Services' },
-  { href: '#work', label: 'Work' },
-  { href: '#about', label: 'About' },
-  { href: '#testimonials', label: 'Testimonials' },
-  { href: '#contact', label: 'Contact' },
+  { href: "#services", label: "Services" },
+  { href: "#work", label: "Work" },
+  { href: "#about", label: "About" },
+  { href: "#testimonials", label: "Testimonials" },
+  { href: "#contact", label: "Contact" },
 ];
 
 export function Navbar() {
@@ -22,34 +22,37 @@ export function Navbar() {
       setIsScrolled(window.scrollY > 50);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
     if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     }
     return () => {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     };
   }, [isMobileMenuOpen]);
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) => {
     e.preventDefault();
     setIsMobileMenuOpen(false);
     const element = document.querySelector(href);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
     }
   };
 
   return (
     <>
       <motion.header
-        className={`${styles.navbar} ${isScrolled ? styles.scrolled : ''}`}
+        className={`${styles.navbar} ${isScrolled ? styles.scrolled : ""}`}
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
@@ -124,7 +127,9 @@ export function Navbar() {
             aria-label="Toggle menu"
             data-cursor="hover"
           >
-            <span className={`${styles.hamburger} ${isMobileMenuOpen ? styles.open : ''}`}>
+            <span
+              className={`${styles.hamburger} ${isMobileMenuOpen ? styles.open : ""}`}
+            >
               <span />
               <span />
             </span>
@@ -137,11 +142,35 @@ export function Navbar() {
         {isMobileMenuOpen && (
           <motion.div
             className={styles.mobileMenu}
-            initial={{ clipPath: 'circle(0% at calc(100% - 40px) 40px)' }}
-            animate={{ clipPath: 'circle(150% at calc(100% - 40px) 40px)' }}
-            exit={{ clipPath: 'circle(0% at calc(100% - 40px) 40px)' }}
+            initial={{ clipPath: "circle(0% at calc(100% - 40px) 40px)" }}
+            animate={{ clipPath: "circle(150% at calc(100% - 40px) 40px)" }}
+            exit={{ clipPath: "circle(0% at calc(100% - 40px) 40px)" }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           >
+            <motion.button
+              className={styles.closeButton}
+              onClick={() => setIsMobileMenuOpen(false)}
+              aria-label="Close menu"
+              data-cursor="hover"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </motion.button>
             <nav className={styles.mobileNav}>
               <motion.ul
                 className={styles.mobileNavList}
